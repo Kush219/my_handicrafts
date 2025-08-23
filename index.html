@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Khush Navi Handicrafts</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html{scroll-behavior:smooth}
+    .active-link{color:#166534;border-bottom:2px solid #166534}
+  </style>
+</head>
+<body class="bg-white text-gray-900">
+  <!-- Top Offer Bar -->
+  <div class="bg-green-900 text-white text-center py-2 text-sm">
+    Enjoy complimentary shipping on all domestic orders up to Rs. 31,999
+  </div>
+
+  <!-- Header -->
+  <header class="sticky top-0 z-20 bg-white/95 backdrop-blur shadow">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between py-4">
+        <!-- Logo / Brand -->
+        <div class="flex items-center gap-3">
+          <img src="logo.png" alt="Logo" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/160x48?text=Logo'">
+          <div class="leading-tight">
+            <div class="text-xl font-bold">Khush Navi Handicrafts</div>
+            <div class="text-xs text-gray-600">Authentic • Timeless • Sustainable</div>
+          </div>
+        </div>
+        <!-- Nav -->
+        <nav class="hidden md:flex items-center gap-6 text-[15px] font-medium">
+          <a href="#home" class="navlink py-1">Home</a>
+          <a href="#shop" class="navlink py-1">Shop</a>
+          <a href="#story" class="navlink py-1">Our Story</a>
+          <a href="#wholesale" class="navlink py-1">Wholesale</a>
+          <a href="#contact" class="navlink py-1">Contact</a>
+          <a href="#offers" class="navlink py-1">Offers</a>
+        </nav>
+        <!-- CTAs -->
+        <div class="flex items-center gap-3 text-sm">
+          <a href="#login" class="px-4 py-2 rounded-lg border border-green-900 text-green-900 hover:bg-green-50">Login</a>
+          <a href="#order" class="px-4 py-2 rounded-lg bg-green-900 text-white hover:bg-green-800">Order Now</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="grid grid-cols-1 md:grid-cols-2 items-stretch">
+    <!-- Left -->
+    <div class="bg-green-900 text-white px-8 md:px-12 py-14 flex flex-col justify-center">
+      <p class="uppercase tracking-widest text-sm opacity-80">Khush Navi Handicrafts</p>
+      <h1 class="text-4xl md:text-5xl font-extrabold mt-2">Embrace the spirit of India</h1>
+      <p class="mt-4 text-base md:text-lg opacity-95 max-w-xl">Beautiful handcrafted pieces that span millennia. Pure, timeless, and sustainable — sourced from artisans across India.</p>
+      <div class="mt-8 flex gap-3">
+        <a href="#shop" class="bg-white text-green-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Shop Now</a>
+        <a href="#story" class="px-6 py-3 rounded-lg border border-white/70 hover:bg-white/10">Learn More</a>
+      </div>
+    </div>
+    <!-- Right (Fixed Image) -->
+    <div>
+      <img src="hero.jpg" alt="Hero Image" class="w-full h-[520px] md:h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1607544838970-98f0a6f2469f?q=80&w=1600&auto=format&fit=crop'">
+    </div>
+  </section>
+
+  <!-- Products -->
+  <section id="shop" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <h2 class="text-3xl font-bold text-center mb-10">Our Products</h2>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="productGrid">
+      <!-- 20 Product Cards -->
+      <!-- Card template repeated with unique data -->
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product1.jpg" alt="Handmade Cushion" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Handmade Cushion</h3>
+          <p class="text-green-800 font-bold">₹799</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Handmade Cushion" data-price="799">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product2.jpg" alt="Wooden Bowl" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Wooden Bowl</h3>
+          <p class="text-green-800 font-bold">₹1,299</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Wooden Bowl" data-price="1299">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product3.jpg" alt="Clay Pot" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Clay Pot</h3>
+          <p class="text-green-800 font-bold">₹599</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Clay Pot" data-price="599">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product4.jpg" alt="Brass Lamp" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Brass Lamp</h3>
+          <p class="text-green-800 font-bold">₹1,899</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Brass Lamp" data-price="1899">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product5.jpg" alt="Silk Scarf" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Silk Scarf</h3>
+          <p class="text-green-800 font-bold">₹1,999</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Silk Scarf" data-price="1999">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product6.jpg" alt="Bamboo Basket" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Bamboo Basket</h3>
+          <p class="text-green-800 font-bold">₹1,299</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Bamboo Basket" data-price="1299">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product7.jpg" alt="Marble Statue" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Marble Statue</h3>
+          <p class="text-green-800 font-bold">₹4,499</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Marble Statue" data-price="4499">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product8.jpg" alt="Handwoven Rug" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Handwoven Rug</h3>
+          <p class="text-green-800 font-bold">₹6,999</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Handwoven Rug" data-price="6999">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product9.jpg" alt="Terracotta Vase" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Terracotta Vase</h3>
+          <p class="text-green-800 font-bold">₹2,199</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Terracotta Vase" data-price="2199">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product10.jpg" alt="Jute Bag" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Jute Bag</h3>
+          <p class="text-green-800 font-bold">₹999</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Jute Bag" data-price="999">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product11.jpg" alt="Silver Jewelry" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Silver Jewelry</h3>
+          <p class="text-green-800 font-bold">₹5,499</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Silver Jewelry" data-price="5499">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product12.jpg" alt="Wooden Toy" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Wooden Toy</h3>
+          <p class="text-green-800 font-bold">₹799</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Wooden Toy" data-price="799">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product13.jpg" alt="Handpainted Plate" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Handpainted Plate</h3>
+          <p class="text-green-800 font-bold">₹1,599</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Handpainted Plate" data-price="1599">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product14.jpg" alt="Copper Bottle" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Copper Bottle</h3>
+          <p class="text-green-800 font-bold">₹1,199</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Copper Bottle" data-price="1199">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product15.jpg" alt="Wool Shawl" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Wool Shawl</h3>
+          <p class="text-green-800 font-bold">₹3,299</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Wool Shawl" data-price="3299">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product16.jpg" alt="Stone Idol" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Stone Idol</h3>
+          <p class="text-green-800 font-bold">₹7,999</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Stone Idol" data-price="7999">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product17.jpg" alt="Tribal Mask" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Tribal Mask</h3>
+          <p class="text-green-800 font-bold">₹2,799</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Tribal Mask" data-price="2799">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product18.jpg" alt="Embroidery Cushion" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Embroidery Cushion</h3>
+          <p class="text-green-800 font-bold">₹1,899</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Embroidery Cushion" data-price="1899">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product19.jpg" alt="Handloom Saree" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Handloom Saree</h3>
+          <p class="text-green-800 font-bold">₹4,999</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Handloom Saree" data-price="4999">Order Now</a>
+        </div>
+      </div>
+
+      <div class="border rounded-2xl shadow-sm overflow-hidden group">
+        <img src="Product20.jpg" alt="Metal Wall Art" class="w-full h-56 object-cover group-hover:scale-[1.02] transition" />
+        <div class="p-4">
+          <h3 class="font-semibold">Metal Wall Art</h3>
+          <p class="text-green-800 font-bold">₹6,499</p>
+          <div class="flex items-center mt-3 gap-2">
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="-1">-</button>
+            <input type="text" value="1" class="qtybox w-12 text-center border rounded" />
+            <button class="qtybtn px-3 py-1 rounded bg-gray-200" data-step="1">+</button>
+          </div>
+          <a href="#order" class="orderBtn mt-3 block text-center bg-green-900 text-white w-full py-2 rounded-lg hover:bg-green-700" data-product="Metal Wall Art" data-price="6499">Order Now</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Our Story -->
+  <section id="story" class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold">Our Story</h2>
+      <p class="mt-4 text-gray-700">Founded by <b>Khush Navi</b>, we collaborate directly with artisans to bring authentic Indian handicrafts to your home while ensuring fair trade and sustainable practices.</p>
+    </div>
+  </section>
+
+  <!-- Wholesale -->
+  <section id="wholesale" class="py-16">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold">Wholesale</h2>
+      <p class="mt-4 text-gray-700">For bulk orders and B2B partnerships, reach out on <b>+91 9891022257</b> or <b>khushnavi88@gmail.com</b>.</p>
+    </div>
+  </section>
+
+  <!-- Offers -->
+  <section id="offers" class="py-16 bg-gray-50">
+    <div class="max-w-4xl mx-auto px-6 text-center">
+      <h2 class="text-3xl font-bold">Offers</h2>
+      <p class="mt-4 text-gray-700">Festival sale is live! Flat 10% off on orders above ₹2,999.</p>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-16">
+    <div class="max-w-4xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Contact Us</h2>
+      <div class="mt-8 grid md:grid-cols-2 gap-8">
+        <div class="space-y-2">
+          <p><b>Owner:</b> Khush Navi</p>
+          <p><b>Phone:</b> <a class="text-green-800" href="tel:+919891022257">+91 9891022257</a></p>
+          <p><b>Email:</b> <a class="text-green-800" href="mailto:khushnavi88@gmail.com">khushnavi88@gmail.com</a></p>
+          <p class="text-gray-600">We usually reply within 1 business day.</p>
+        </div>
+        <form class="grid gap-3" onsubmit="event.preventDefault(); alert('Thanks! We\'ll contact you soon.'); this.reset();">
+          <input type="text" placeholder="Your Name" class="p-3 border rounded-lg" required />
+          <input type="email" placeholder="Your Email" class="p-3 border rounded-lg" required />
+          <input type="tel" placeholder="Your Phone" class="p-3 border rounded-lg" />
+          <textarea placeholder="Message" rows="4" class="p-3 border rounded-lg" required></textarea>
+          <button class="bg-green-900 text-white rounded-lg py-3">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Login -->
+  <section id="login" class="py-16 bg-gray-50">
+    <div class="max-w-md mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Login</h2>
+      <form class="mt-6 grid gap-4" onsubmit="event.preventDefault(); alert('Logged in (demo)');">
+        <input type="email" placeholder="Email" class="p-3 border rounded-lg" required />
+        <input type="password" placeholder="Password" class="p-3 border rounded-lg" required />
+        <button class="bg-green-900 text-white rounded-lg py-3">Login</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Order Form (Auto-filled) -->
+  <section id="order" class="py-16">
+    <div class="max-w-2xl mx-auto px-6">
+      <h2 class="text-3xl font-bold text-center">Place Your Order</h2>
+      <form id="orderForm" class="mt-6 grid gap-3" onsubmit="event.preventDefault(); alert('Order placed! We will confirm on WhatsApp/Email.'); this.reset();">
+        <div class="grid md:grid-cols-2 gap-3">
+          <input id="ofProduct" type="text" placeholder="Product" class="p-3 border rounded-lg" required />
+          <input id="ofQty" type="number" min="1" value="1" class="p-3 border rounded-lg" required />
+        </div>
+        <input id="ofName" type="text" value="Khush Navi" placeholder="Your Name" class="p-3 border rounded-lg" required />
+        <div class="grid md:grid-cols-2 gap-3">
+          <input id="ofPhone" type="tel" value="9891022257" placeholder="Phone" class="p-3 border rounded-lg" required />
+          <input id="ofEmail" type="email" value="khushnavi88@gmail.com" placeholder="Email" class="p-3 border rounded-lg" required />
+        </div>
+        <textarea id="ofAddress" placeholder="Shipping Address" rows="3" class="p-3 border rounded-lg" required></textarea>
+        <button class="bg-green-900 text-white rounded-lg py-3">Submit Order</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-900 text-white py-8">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div>
+        <div class="font-semibold">Khush Navi Handicrafts</div>
+        <div class="text-sm opacity-90">© 2025. All Rights Reserved.</div>
+      </div>
+      <div class="text-sm">
+        📞 <a href="tel:+919891022257" class="underline">+91 9891022257</a>
+        &nbsp; | &nbsp; ✉️ <a href="mailto:khushnavi88@gmail.com" class="underline">khushnavi88@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Qty +/- controls
+    document.querySelectorAll('.qtybtn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const step = parseInt(btn.dataset.step, 10);
+        const box = btn.parentElement.querySelector('.qtybox');
+        let val = parseInt(box.value || '1', 10);
+        val = isNaN(val) ? 1 : val;
+        val = Math.max(1, val + step);
+        box.value = val;
+      });
+    });
+
+    // On Order Now -> fill order form
+    document.querySelectorAll('.orderBtn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const card = btn.closest('div');
+        const qtyInput = card.querySelector('.qtybox');
+        document.getElementById('ofProduct').value = btn.dataset.product;
+        document.getElementById('ofQty').value = parseInt(qtyInput.value || '1', 10);
+        // Pre-fill contact (owner) already set; user can change
+      });
+    });
+
+    // Simple active link on scroll
+    const sections = ['home','shop','story','wholesale','contact','offers'];
+    const navlinks = document.querySelectorAll('.navlink');
+    function setActive(){
+      let idx = 0; let fromTop = window.scrollY + 120;
+      sections.forEach((id,i)=>{
+        const el = document.getElementById(id);
+        if(el && el.offsetTop <= fromTop) idx = i;
+      });
+      navlinks.forEach(l=>l.classList.remove('active-link'));
+      if(navlinks[idx]) navlinks[idx].classList.add('active-link');
+    }
+    document.addEventListener('scroll', setActive);
+    window.addEventListener('load', setActive);
+  </script>
+</body>
+</html>
