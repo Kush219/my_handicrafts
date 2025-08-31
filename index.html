@@ -3,246 +3,334 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Khush Navi Handicrafts</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>ShopKart</title>
   <style>
-    html{scroll-behavior:smooth}
-    .active-link{color:#166534;border-bottom:2px solid #166534}
-    #cartDrawer { transition: right 0.3s ease; }
+    :root{
+      --brand:#2a55e5; /* Flipkart-ish blue */
+      --brand-dark:#1f3fb0;
+      --accent:#ffdf00; /* yellow */
+      --bg:#f1f3f6;
+      --text:#1d1d1f;
+      --muted:#5f6b7a;
+      --card:#ffffff;
+      --shadow:0 10px 20px rgba(0,0,0,.06),0 2px 6px rgba(0,0,0,.04);
+      --radius:16px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,'Helvetica Neue',Arial; color:var(--text); background:var(--bg);
+    }
+
+    /* Header */
+    .header{position:sticky; top:0; z-index:50; background:var(--brand); color:#fff; box-shadow:var(--shadow)}
+    .topbar{display:flex; align-items:center; gap:16px; padding:10px 16px; max-width:1200px; margin:0 auto}
+    .logo{display:flex; align-items:center; gap:8px; font-weight:800; letter-spacing:.2px}
+    .logo span{background:var(--accent); color:#000; padding:4px 8px; border-radius:8px}
+
+    .search{flex:1; display:flex; align-items:center; gap:8px; background:#fff; padding:8px 12px; border-radius:999px}
+    .search input{flex:1; border:none; outline:none; font-size:15px}
+    .search button{border:none; background:var(--brand); color:#fff; padding:8px 14px; border-radius:999px; cursor:pointer}
+
+    .actions{display:flex; align-items:center; gap:14px}
+    .btn{display:inline-flex; align-items:center; gap:8px; border:none; background:#fff; color:var(--brand); padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600}
+    .btn.ghost{background:transparent; color:#fff}
+
+    .nav{background:#fff}
+    .nav-wrap{max-width:1200px; margin:0 auto; display:flex; gap:18px; overflow:auto; padding:8px 16px}
+    .nav a{white-space:nowrap; text-decoration:none; color:var(--muted); padding:8px 12px; border-radius:999px; font-weight:600}
+    .nav a.active, .nav a:hover{background:#e8eeff; color:var(--brand)}
+
+    /* Layout */
+    .container{max-width:1200px; margin:18px auto; padding:0 16px}
+    .grid{display:grid; grid-template-columns:280px 1fr; gap:18px}
+    @media (max-width:920px){ .grid{grid-template-columns:1fr} }
+
+    /* Sidebar */
+    .sidebar{background:var(--card); border-radius:var(--radius); box-shadow:var(--shadow); padding:16px}
+    .side-title{font-size:18px; font-weight:800; margin:0 0 12px}
+    .filter{margin:0 0 14px}
+    .filter h4{margin:10px 0; font-size:14px; color:var(--muted)}
+    .filter label{display:flex; align-items:center; gap:8px; padding:6px 0; cursor:pointer}
+
+    /* Carousel */
+    .carousel{position:relative; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow)}
+    .slides{display:flex; transition:transform .5s ease}
+    .slide{min-width:100%; height:260px; display:grid; place-items:center; background:#16344a; color:#fff; font-size:28px; font-weight:800}
+    .dots{position:absolute; bottom:10px; left:0; right:0; display:flex; justify-content:center; gap:8px}
+    .dot{width:10px; height:10px; border-radius:999px; background:#fff9; border:1px solid #fff; cursor:pointer}
+    .dot.active{background:#fff}
+
+    /* Product row */
+    .row{margin-top:18px; background:var(--card); border-radius:var(--radius); padding:14px; box-shadow:var(--shadow)}
+    .row-head{display:flex; justify-content:space-between; align-items:center; padding:6px 6px 12px}
+    .row-title{font-size:18px; font-weight:800}
+    .products{display:grid; grid-template-columns:repeat(6,1fr); gap:14px}
+    @media (max-width:1100px){ .products{grid-template-columns:repeat(4,1fr)} }
+    @media (max-width:760px){ .products{grid-template-columns:repeat(2,1fr)} }
+
+    .card{background:#fff; border-radius:14px; padding:10px; display:flex; flex-direction:column; gap:8px; border:1px solid #eef1f6; transition:transform .18s ease, box-shadow .18s ease}
+    .thumb{position:relative; aspect-ratio:1/1; border-radius:12px; overflow:hidden; background:#f6f8fb}
+    .thumb img{width:100%; height:100%; object-fit:cover; transition:transform .28s ease}
+    .card:hover{transform:translateY(-2px); box-shadow:var(--shadow)}
+    .card:hover .thumb img{transform:scale(1.12)} /* hover zoom */
+    .brand{font-size:12px; color:var(--muted)}
+    .name{font-size:14px; font-weight:700}
+    .price{display:flex; align-items:center; gap:8px}
+    .price strong{font-size:16px}
+    .price s{color:#99a3af}
+    .rating{font-size:12px; color:#2b8a3e; font-weight:700}
+
+    .add{margin-top:auto; display:flex; align-items:center; gap:8px}
+    .add button{flex:1; border:none; background:var(--brand); color:#fff; padding:8px 10px; border-radius:10px; cursor:pointer; font-weight:700}
+    .qty{display:flex; align-items:center; gap:8px}
+    .qty button{width:28px; height:28px; border-radius:8px; border:1px solid #e5e7eb; background:#fff; cursor:pointer}
+
+    /* Footer */
+    .footer{margin-top:26px; background:#0b2155; color:#dbe4ff}
+    .footer-wrap{max-width:1200px; margin:0 auto; padding:24px 16px; display:grid; grid-template-columns:repeat(4,1fr); gap:18px}
+    .footer h4{margin:0 0 8px}
+    .footer a{color:#c7d2fe; text-decoration:none; display:block; padding:4px 0}
+    @media (max-width:760px){ .footer-wrap{grid-template-columns:repeat(2,1fr)} }
+
+    /* small helpers */
+    .badge{background:#fff; color:var(--brand); font-weight:800; padding:2px 8px; border-radius:999px}
   </style>
 </head>
-<body class="bg-white text-gray-900">
-
-  <!-- Top Offer Bar -->
-  <div class="bg-green-900 text-white text-center py-2 text-sm">
-    Enjoy complimentary shipping on all domestic orders up to Rs. 31,999
-  </div>
-
-  <!-- Header -->
-  <header class="sticky top-0 z-20 bg-white/95 backdrop-blur shadow">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between py-4">
-        <!-- Logo / Brand -->
-        <div class="flex items-center gap-3">
-          <img src="logo.png" alt="Logo" class="h-12 w-auto" onerror="this.src='https://via.placeholder.com/160x48?text=Logo'">
-          <div class="leading-tight">
-            <div class="text-xl font-bold">Khush Navi Handicrafts</div>
-            <div class="text-xs text-gray-600">Authentic • Timeless • Sustainable</div>
-          </div>
-        </div>
-        <!-- Nav -->
-        <nav class="hidden md:flex items-center gap-6 text-[15px] font-medium">
-          <a href="#home" class="navlink py-1">Home</a>
-          <a href="#shop" class="navlink py-1">Shop</a>
-          <a href="#ourstory" class="navlink py-1">Our Story</a>
-          <a href="#wholesale" class="navlink py-1">Wholesale</a>
-          <a href="#contact" class="navlink py-1">Contact</a>
-          <a href="#offers" class="navlink py-1">Offers</a>
-        </nav>
-        <!-- Cart -->
-        <div class="flex items-center gap-3 text-xl cursor-pointer" onclick="toggleCart()">
-          🛒 <span id="cartCount" class="text-sm bg-green-900 text-white rounded-full px-2">0</span>
-        </div>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="topbar">
+      <div class="logo" aria-label="ShopKart logo">
+        <span>SK</span> ShopKart
+      </div>
+      <div class="search" role="search">
+        <input id="searchInput" placeholder="Search for products, brands and more" />
+        <button id="searchBtn">Search</button>
+      </div>
+      <div class="actions">
+        <button class="btn" id="loginBtn">Login</button>
+        <button class="btn ghost" id="cartBtn">🛒 Cart <span id="cartCount" class="badge">0</span></button>
       </div>
     </div>
+    <nav class="nav">
+      <div class="nav-wrap" id="navWrap">
+        <a href="#" class="active">Top Offers</a>
+        <a href="#mobiles">Mobiles</a>
+        <a href="#electronics">Electronics</a>
+        <a href="#fashion">Fashion</a>
+        <a href="#home">Home</a>
+        <a href="#appliances">Appliances</a>
+        <a href="#beauty">Beauty</a>
+        <a href="#toys">Toys</a>
+        <a href="#grocery">Grocery</a>
+      </div>
+    </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section id="home" class="grid grid-cols-1 md:grid-cols-1 items-stretch">
-    <!-- Left -->
-    <div class="bg-green-900 text-white px-8 md:px-12 py-2 flex flex-col justify-center">
-      <p class="uppercase tracking-widest text-sm opacity-80">Khush Navi Handicrafts</p>
-      <h1 class="text-4xl md:text-5xl font-extrabold mt-2">Embrace the spirit of India</h1>
-      <p class="mt-4 text-base md:text-lg opacity-95 max-w-xl">Beautiful handcrafted pieces that span millennia. Pure, timeless, and sustainable — sourced from artisans across India.</p>
-      <div class="mt-8 flex gap-3">
-        <a href="#shop" class="bg-white text-green-900 px-6 py-3 rounded-lg font-semibold hover:bg-gray-200">Shop Now</a>
-        <a href="#ourstory" class="px-6 py-3 rounded-lg border border-white/70 hover:bg-white/10">Learn More</a>
-      </div>
-    </div>
-    <!-- Right (Fixed Image) -->
-    <div>
-      <img src="hero.jpg" alt="Hero Image" class="w-full h-[520px] md:h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1607544838970-98f0a6f2469f?q=80&w=1600&auto=format&fit=crop'">
-    </div>
-  </section>
+  <main class="container">
+    <div class="grid">
+      <!-- SIDEBAR FILTERS -->
+      <aside class="sidebar" aria-label="Filters">
+        <h3 class="side-title">Filters</h3>
+        <div class="filter">
+          <h4>Availability</h4>
+          <label><input type="checkbox" checked/> In Stock</label>
+          <label><input type="checkbox"/> Fast Delivery</label>
+        </div>
+        <div class="filter">
+          <h4>Brand</h4>
+          <label><input type="checkbox"/> Realme</label>
+          <label><input type="checkbox"/> Samsung</label>
+          <label><input type="checkbox"/> OnePlus</label>
+        </div>
+        <div class="filter">
+          <h4>Price</h4>
+          <label><input type="radio" name="p"/> Under ₹10,000</label>
+          <label><input type="radio" name="p"/> ₹10,000 – ₹20,000</label>
+          <label><input type="radio" name="p"/> ₹20,000 – ₹40,000</label>
+        </div>
+      </aside>
 
-  <!-- Products -->
-  <section id="shop" class="py-2 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-    <h2 class="text-4xl font-bold text-center mb-10">**OUR PRODUCTS**</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8" id="productGrid">
-      <script>
-        const products = [];
-        for(let i=1;i<=20;i++){
-          products.push({name:`Product ${i}`,price:500+i*10,image:`images/Product${i}.jpg`});
-        }
-        document.write(products.map(p=>`
-          <div class="border rounded-2xl shadow-sm overflow-hidden group">
-            <img src="${p.image}" alt="${p.name}" class="w-full h-56 object-cover" onerror="this.src='https://via.placeholder.com/300x200?text=${p.name}'"/>
-            <div class="p-4">
-              <h3 class="font-semibold">${p.name}</h3>
-              <p class="text-green-800 font-bold">₹${p.price}</p>
-              <div class="flex gap-2 mt-2">
-                <input type="number" min="1" value="1" class="qty w-16 border rounded px-2" />
-                <button class="addBtn flex-1 bg-green-900 text-white py-2 rounded-lg hover:bg-green-700" data-product="${p.name}" data-price="${p.price}">Add</button>
-              </div>
-            </div>
+      <section>
+        <!-- CAROUSEL -->
+        <div class="carousel" aria-label="Deals slider">
+          <div class="slides" id="slides">
+            <div class="slide" style="background:#1f3fb0">Big Diwali Sale • Upto 70% OFF</div>
+            <div class="slide" style="background:#046c4e">Mobiles Bonanza • Exchange Offers</div>
+            <div class="slide" style="background:#7c2d12">Home & Kitchen • Mega Offers</div>
           </div>
-        `).join(''));
-      </script>
+          <div class="dots" id="dots"></div>
+        </div>
+
+        <!-- PRODUCT ROWS -->
+        <div class="row" id="mobiles">
+          <div class="row-head">
+            <div class="row-title">Best of Mobiles</div>
+            <button class="btn" onclick="alert('View all Mobiles')">View All</button>
+          </div>
+          <div class="products" id="row-mobiles"></div>
+        </div>
+
+        <div class="row" id="electronics">
+          <div class="row-head">
+            <div class="row-title">Electronics Deals</div>
+            <button class="btn" onclick="alert('View all Electronics')">View All</button>
+          </div>
+          <div class="products" id="row-electronics"></div>
+        </div>
+
+        <div class="row" id="fashion">
+          <div class="row-head">
+            <div class="row-title">Trending Fashion</div>
+            <button class="btn" onclick="alert('View all Fashion')">View All</button>
+          </div>
+          <div class="products" id="row-fashion"></div>
+        </div>
+      </section>
     </div>
-  </section>
+  </main>
 
-  <!-- Cart Drawer -->
-  <div id="cartDrawer" class="fixed top-0 right-[-100%] w-80 h-full bg-white shadow-lg z-50 p-4 overflow-y-auto">
-    <h2 class="text-2xl font-bold mb-4">Your Cart</h2>
-    <ul id="cartItems" class="space-y-2"></ul>
-    <p class="mt-4 font-semibold">Total: ₹<span id="cartTotal">0</span></p>
-    <button onclick="checkout()" class="mt-4 w-full bg-green-900 text-white py-2 rounded-lg">Checkout</button>
-    <button onclick="clearCart()" class="mt-2 w-full bg-red-600 text-white py-2 rounded-lg">Clear Cart</button>
-    <button onclick="toggleCart()" class="mt-2 w-full bg-gray-300 py-2 rounded-lg">Close</button>
-
-    <!-- Customer Form -->
-    <div class="mt-6">
-      <h3 class="text-lg font-bold mb-2">Customer Details</h3>
-      <form id="customerForm" class="space-y-2">
-        <input type="text" id="custName" placeholder="Name" required class="w-full border px-2 py-1 rounded"/>
-        <input type="text" id="custMobile" placeholder="Mobile" required class="w-full border px-2 py-1 rounded"/>
-        <input type="email" id="custEmail" placeholder="Email" required class="w-full border px-2 py-1 rounded"/>
-        <textarea id="custAddress" placeholder="Shipping Address" required class="w-full border px-2 py-1 rounded"></textarea>
-        <button type="submit" class="w-full bg-green-700 text-white py-2 rounded">Save Details</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Checkout Modal -->
-  <div id="checkoutModal" class="fixed top-0 left-0 w-full h-full bg-black/50 hidden items-center justify-center z-50">
-    <div class="bg-white p-6 rounded-lg text-center">
-      <h2 class="text-xl font-bold mb-3">Scan to Pay</h2>
-      <img src="images/Barcode.jpg" alt="Paytm QR Code" class="mx-auto w-48 h-48">
-      <p class="mt-2">Total: ₹<span id="finalAmount">0</span></p>
-      <button onclick="document.getElementById('checkoutModal').classList.add('hidden')" class="mt-4 bg-green-900 text-white px-4 py-2 rounded-lg">Close</button>
-    </div>
-  </div>
-
-  <!-- Extra Sections shifted to bottom -->
-  <section id="ourstory" class="p-6 bg-gray-50 shadow my-6">
-    <h2 class="text-2xl font-bold mb-2">Our Story</h2>
-    <p class="text-gray-700">We started our journey with a mission to deliver the finest handicrafts from skilled artisans to your home.</p>
-  </section>
-
-  <section id="wholesale" class="p-6 bg-gray-50 shadow my-6">
-    <h2 class="text-2xl font-bold mb-2">Wholesale</h2>
-    <p class="text-gray-700">We provide wholesale orders with special discounts. Contact us for bulk purchasing.</p>
-  </section>
-
-  <section id="offers" class="p-6 bg-gray-50 shadow my-6">
-    <h2 class="text-2xl font-bold mb-2">Offers</h2>
-    <p class="text-gray-700">Check out our exciting seasonal offers and discounts on various products.</p>
-  </section>
-
-  <section id="contact" class="p-6 bg-gray-50 shadow my-6">
-    <h2 class="text-2xl font-bold mb-2">Contact</h2>
-    <p class="text-gray-700">Name: <b>Khush Navi</b></p>
-    <p class="text-gray-700">Mobile: <b>+91 9891022257</b></p>
-    <p class="text-gray-700">Email: <b>khushnavi88@gmail.com</b></p>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-green-900 text-white py-8">
-    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+  <footer class="footer">
+    <div class="footer-wrap">
       <div>
-        <div class="font-semibold">Khush Navi Handicrafts</div>
-        <div class="text-sm opacity-90">© 2025. All Rights Reserved.</div>
+        <h4>About</h4>
+        <a href="#">Contact Us</a>
+        <a href="#">About Us</a>
+        <a href="#">Careers</a>
       </div>
-      <div class="text-sm">
-        📞 <a href="tel:+919891022257" class="underline">+91 9891022257</a>
-        &nbsp; | &nbsp; ✉️ <a href="mailto:khushnavi88@gmail.com" class="underline">khushnavi88@gmail.com</a>
+      <div>
+        <h4>Help</h4>
+        <a href="#">Payments</a>
+        <a href="#">Shipping</a>
+        <a href="#">Cancellation</a>
+      </div>
+      <div>
+        <h4>Policy</h4>
+        <a href="#">Return Policy</a>
+        <a href="#">Terms Of Use</a>
+        <a href="#">Security</a>
+      </div>
+      <div>
+        <h4>Social</h4>
+        <a href="#">Facebook</a>
+        <a href="#">Twitter</a>
+        <a href="#">YouTube</a>
       </div>
     </div>
   </footer>
 
   <script>
-    let cart = [];
-    let customerSaved = false; // ✅ Track if details filled
+    // --- Simple data ---
+    const PRODUCTS = {
+      mobiles:[
+        {brand:'Realme', name:'Realme 12 Pro 5G (8GB/256GB)', price:20999, mrp:25999, rating:4.3, img:'https://via.placeholder.com/400x400?text=Realme+12+Pro'},
+        {brand:'Samsung', name:'Samsung Galaxy M34 5G', price:15999, mrp:21999, rating:4.4, img:'https://via.placeholder.com/400x400?text=Galaxy+M34'},
+        {brand:'OnePlus', name:'OnePlus Nord CE 4', price:24999, mrp:27999, rating:4.2, img:'https://via.placeholder.com/400x400?text=Nord+CE4'},
+        {brand:'POCO', name:'POCO X6 Pro', price:23999, mrp:26999, rating:4.1, img:'https://via.placeholder.com/400x400?text=POCO+X6+Pro'},
+        {brand:'Moto', name:'Moto G64 5G', price:12999, mrp:14999, rating:4.0, img:'https://via.placeholder.com/400x400?text=Moto+G64'},
+        {brand:'Apple', name:'iPhone 14', price:56999, mrp:69999, rating:4.6, img:'https://via.placeholder.com/400x400?text=iPhone+14'}
+      ],
+      electronics:[
+        {brand:'boAt', name:'Airdopes 141 ANC', price:1499, mrp:3499, rating:4.2, img:'https://via.placeholder.com/400x400?text=Airdopes+141'},
+        {brand:'Sony', name:'WH-CH520 Headphones', price:3999, mrp:5990, rating:4.5, img:'https://via.placeholder.com/400x400?text=Sony+CH520'},
+        {brand:'Canon', name:'Canon EOS 200D II', price:52990, mrp:60995, rating:4.6, img:'https://via.placeholder.com/400x400?text=Canon+200D'},
+        {brand:'Sandisk', name:'Ultra microSD 128GB', price:899, mrp:1499, rating:4.4, img:'https://via.placeholder.com/400x400?text=SanDisk+128GB'},
+        {brand:'Mi', name:'Mi Power Bank 10000mAh', price:1299, mrp:1899, rating:4.1, img:'https://via.placeholder.com/400x400?text=Mi+Power+Bank'},
+        {brand:'Logitech', name:'Wireless Mouse M185', price:899, mrp:995, rating:4.3, img:'https://via.placeholder.com/400x400?text=Logitech+M185'}
+      ],
+      fashion:[
+        {brand:'Puma', name:'Running Shoes', price:1999, mrp:4499, rating:4.1, img:'https://via.placeholder.com/400x400?text=Puma+Shoes'},
+        {brand:'Levi\'s', name:'Men\'s Jeans Slim', price:2499, mrp:3999, rating:4.2, img:'https://via.placeholder.com/400x400?text=Levis+Jeans'},
+        {brand:'Allen Solly', name:'Casual Shirt', price:1399, mrp:2399, rating:4.0, img:'https://via.placeholder.com/400x400?text=Casual+Shirt'},
+        {brand:'HRX', name:'Active T‑shirt', price:699, mrp:1499, rating:4.2, img:'https://via.placeholder.com/400x400?text=Active+Tee'},
+        {brand:'Baggit', name:'Women\'s Handbag', price:1699, mrp:2999, rating:4.3, img:'https://via.placeholder.com/400x400?text=Handbag'},
+        {brand:'Titan', name:'Analog Watch', price:3499, mrp:5499, rating:4.4, img:'https://via.placeholder.com/400x400?text=Titan+Watch'}
+      ]
+    };
 
-    function toggleCart(){
-      const drawer = document.getElementById("cartDrawer");
-      drawer.style.right = (drawer.style.right === "0px") ? "-100%" : "0px";
+    // --- Render product cards ---
+    function formatRupee(n){return '₹'+n.toLocaleString('en-IN')}
+
+    function cardHTML(p, id){
+      return `
+        <article class="card">
+          <div class="thumb"><img src="${p.img}" alt="${p.name}"></div>
+          <div class="brand">${p.brand}</div>
+          <div class="name">${p.name}</div>
+          <div class="price"><strong>${formatRupee(p.price)}</strong> <s>${formatRupee(p.mrp)}</s></div>
+          <div class="rating">★ ${p.rating}</div>
+          <div class="add">
+            <div class="qty">
+              <button aria-label="decrease" onclick="decQty('${id}')">−</button>
+              <span id="q-${id}">1</span>
+              <button aria-label="increase" onclick="incQty('${id}')">+</button>
+            </div>
+            <button onclick="addToCart('${id}')">Add to Cart</button>
+          </div>
+        </article>`
     }
 
-    document.addEventListener("click",(e)=>{
-      if(e.target.classList.contains("addBtn")){
-        const parent = e.target.closest("div");
-        const qty = parseInt(parent.querySelector(".qty").value,10) || 1;
-        const product = e.target.dataset.product;
-        const price = parseInt(e.target.dataset.price,10);
-
-        const existing = cart.find(item => item.product === product);
-        if(existing){
-          existing.qty += qty;
-        } else {
-          cart.push({product,price,qty});
-        }
-        updateCart();
-      }
-    });
-
-    function updateCart(){
-      const cartItems = document.getElementById('cartItems');
-      cartItems.innerHTML = '';
-      let total = 0;
-      cart.forEach(item=>{
-        total += item.price * item.qty;
-        const li = document.createElement('li');
-        li.textContent = `${item.product} x ${item.qty} = ₹${item.price * item.qty}`;
-        cartItems.appendChild(li);
-      });
-      document.getElementById('cartTotal').textContent = total;
-      document.getElementById('cartCount').textContent = cart.reduce((s,i)=>s+i.qty,0);
+    function fillRows(){
+      const rows=[['mobiles','row-mobiles'],['electronics','row-electronics'],['fashion','row-fashion']];
+      rows.forEach(([key,rowId])=>{
+        const wrap=document.getElementById(rowId);
+        wrap.innerHTML = PRODUCTS[key].map((p,i)=>cardHTML(p, key+'-'+i)).join('');
+      })
     }
 
-    function clearCart(){
-      cart = [];
-      updateCart();
-    }	
-
-    function checkout(){
-      if(!customerSaved){
-        alert("⚠️ Please fill and save customer details before checkout.");
-        return;
-      }
-      let total = cart.reduce((sum,item)=>sum+(item.price*item.qty),0);
-      document.getElementById('finalAmount').textContent = total;
-      document.getElementById('checkoutModal').classList.remove('hidden');
+    // --- Qty & cart ---
+    let CART_COUNT=0;
+    function incQty(id){ const el=document.getElementById('q-'+id); el.textContent = +el.textContent + 1 }
+    function decQty(id){ const el=document.getElementById('q-'+id); el.textContent = Math.max(1, +el.textContent - 1) }
+    function addToCart(id){
+      const el=document.getElementById('q-'+id); CART_COUNT += +el.textContent; el.textContent=1; document.getElementById('cartCount').textContent=CART_COUNT
     }
 
-    // Save customer details
-    document.getElementById('customerForm').addEventListener('submit',function(e){
-      e.preventDefault();
-      customerSaved = true; // ✅ allow checkout now
-      alert("✅ Customer details saved!");
-      this.reset();
-    });
+    // --- Search demo (filters currently visible cards by name/brand) ---
+    function wireSearch(){
+      const input=document.getElementById('searchInput');
+      const btn=document.getElementById('searchBtn');
+      const doFilter=()=>{
+        const q=input.value.toLowerCase();
+        document.querySelectorAll('.card').forEach(card=>{
+          const txt=card.innerText.toLowerCase();
+          card.style.display = txt.includes(q)?'flex':'none';
+        })
+      };
+      btn.addEventListener('click',doFilter);
+      input.addEventListener('keydown',e=>{ if(e.key==='Enter') doFilter() });
+    }
 
-    // active link on scroll
-    const sections = document.querySelectorAll("section");
-    const navLinks = document.querySelectorAll(".navlink");
-    window.addEventListener("scroll", () => {
-      let current = "";
-      sections.forEach(sec => {
-        const top = window.scrollY;
-        const offset = sec.offsetTop - 150;
-        const height = sec.offsetHeight;
-        if(top >= offset && top < offset + height){
-          current = sec.getAttribute("id");
-        }
-      });
-      navLinks.forEach(link => {
-        link.classList.remove("active-link");
-        if(link.getAttribute("href").includes(current)){
-          link.classList.add("active-link");
-        }
-      });
-    });
+    // --- Carousel ---
+    function wireCarousel(){
+      const slides=document.getElementById('slides');
+      const dots=document.getElementById('dots');
+      const total=slides.children.length;
+      let i=0, timer;
+
+      function go(n){ i=(n+total)%total; slides.style.transform=`translateX(-${i*100}%)`;[...dots.children].forEach((d,di)=>d.classList.toggle('active', di===i)); }
+      function auto(){ timer=setInterval(()=>go(i+1), 3500) }
+      function stop(){ clearInterval(timer) }
+
+      for(let k=0;k<total;k++){ const d=document.createElement('div'); d.className='dot'+(k===0?' active':''); d.addEventListener('click',()=>{stop();go(k);auto()}); dots.appendChild(d) }
+      slides.addEventListener('mouseenter',stop); slides.addEventListener('mouseleave',auto);
+      auto();
+    }
+
+    // --- Active nav on click ---
+    function wireNav(){
+      const wrap=document.getElementById('navWrap');
+      wrap.querySelectorAll('a').forEach(a=>{
+        a.addEventListener('click',e=>{
+          wrap.querySelectorAll('a').forEach(x=>x.classList.remove('active'));
+          e.currentTarget.classList.add('active');
+        })
+      })
+    }
+
+    // init
+    fillRows(); wireSearch(); wireCarousel(); wireNav();
   </script>
 </body>
 </html>
